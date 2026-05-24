@@ -60,4 +60,14 @@ describe("extractJson", () => {
     expect(r.json).toBeNull();
     expect(r.raw).toContain("could not browse");
   });
+  it("strips a fenced block even when surrounded by prose", () => {
+    const r = extractJson('Here is the JSON:\n```json\n{"a":1}\n```\nHope this helps!');
+    expect(r.parseError).toBe(false);
+    expect(r.json).toEqual({ a: 1 });
+  });
+  it("preserves the original text in raw even when fenced", () => {
+    const input = '```json\n{"a":1}\n```';
+    const r = extractJson(input);
+    expect(r.raw).toBe(input);
+  });
 });

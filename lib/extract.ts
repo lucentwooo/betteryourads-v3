@@ -28,7 +28,7 @@ export function extractJson(text: string): ExtractJsonResult {
   const raw = text;
   let candidate = text.trim();
   // Strip a leading ```json / ``` fence and trailing ``` if present.
-  const fenced = candidate.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
+  const fenced = candidate.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
   if (fenced) {
     candidate = fenced[1].trim();
   }
